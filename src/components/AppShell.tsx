@@ -90,5 +90,5 @@ const tones: Record<string, string> = {
   ok: "bg-success/20 text-foreground", alerta: "bg-warning/25 text-foreground", erro: "bg-primary/15 text-primary",
 };
 export function Pill({ tone, children }: { tone: string; children: ReactNode }) {
-  return <span className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold ${tones[tone] ?? tones.encerrada}`}>{children}</span>;
+  return <span className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold ${tones[tone] ?? tones["encerrada"]}`}>{children}</span>;
 }

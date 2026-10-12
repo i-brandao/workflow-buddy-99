@@ -29,7 +29,7 @@ function Insights() {
   vagas.filter((v) => v.estado === "demanda").forEach((v) => alertas.push({ tone: "alerta", texto: `Vaga de ${v.curso} em ${setores.find((s) => s.id === v.setorId)?.nome} sem solicitação` }));
 
   const ativos = estagiarios.filter((e) => !e.desfecho);
-  const faixas = [30, 60, 90].map((n, i, a) => ({ n, lista: ativos.filter((e) => { const d = daysUntil(e.fim); return d >= (i ? a[i - 1] + 1 : 0) && d <= n; }) }));
+  const faixas = [30, 60, 90].map((n, i, a) => ({ n, lista: ativos.filter((e) => { const d = daysUntil(e.fim); return d >= (i ? a[i - 1]! + 1 : 0) && d <= n; }) }));
 
   const ciclos = vagas.map(tempoCiclo).filter((x): x is number => x !== null);
   const medio = ciclos.length ? Math.round(ciclos.reduce((a, b) => a + b, 0) / ciclos.length) : 0;

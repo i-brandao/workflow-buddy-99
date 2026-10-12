@@ -16,7 +16,7 @@ export interface Instituicao { id: string; nome: string; contato: string; conven
 export interface Vaga {
   id: string; setorId: string; tipo: Tipo; curso: string; quantidade: number;
   inicio: string; fim: string; cargaHoraria: number; preceptor: string; estado: EstadoVaga;
-  instituicaoId?: string; solicitadaEm?: string; alocadaEm?: string;
+  instituicaoId?: string | undefined; solicitadaEm?: string | undefined; alocadaEm?: string | undefined;
 }
 export interface Escala { dia: number; entrada: string; saida: string }
 export interface Documento { tipo: string; entregue: boolean }
@@ -24,7 +24,7 @@ export interface Estagiario {
   id: string; nome: string; vagaId: string; setorId: string; instituicaoId: string; curso: string;
   periodo: number; orientador: string; preceptor: string; vinculo: "Bolsista" | "Voluntário";
   bolsa: number; inicio: string; fim: string; atividades: string; escala: Escala[];
-  documentos: Documento[]; desfecho: Desfecho; cargoContratado?: string; contratadoEm?: string;
+  documentos: Documento[]; desfecho: Desfecho; cargoContratado?: string | undefined; contratadoEm?: string | undefined;
   horasCumpridas: number;
 }
 
@@ -55,13 +55,13 @@ const preceptores = ["Dra. Helena Castro", "Dr. Paulo Neves", "Enf. Márcia Leã
 const estadosSeed: EstadoVaga[] = ["ativa", "ativa", "ativa", "encerrada", "solicitada", "selecao", "demanda", "ativa", "encerrada", "solicitada"];
 
 export const seedVagas: Vaga[] = Array.from({ length: 30 }, (_, i) => {
-  const estado = estadosSeed[i % estadosSeed.length];
-  const s = setores[i % setores.length];
+  const estado = estadosSeed[i % estadosSeed.length]!;
+  const s = setores[i % setores.length]!;
   return {
-    id: `v${i + 1}`, setorId: s.id, tipo: i % 3 === 0 ? "Prática" : "Estágio", curso: cursos[i % cursos.length],
+    id: `v${i + 1}`, setorId: s.id, tipo: i % 3 === 0 ? "Prática" : "Estágio", curso: cursos[i % cursos.length]!,
     quantidade: 1, inicio: plus(-150 + (i % 5) * 20), fim: plus(estado === "encerrada" ? -10 - i : 15 + i * 6),
-    cargaHoraria: i % 2 ? 30 : 20, preceptor: preceptores[i % preceptores.length], estado,
-    instituicaoId: estado === "demanda" ? undefined : seedInstituicoes[i % 4].id,
+    cargaHoraria: i % 2 ? 30 : 20, preceptor: preceptores[i % preceptores.length]!, estado,
+    instituicaoId: estado === "demanda" ? undefined : seedInstituicoes[i % 4]!.id,
     solicitadaEm: estado === "demanda" ? undefined : plus(-200 + i * 3),
     alocadaEm: ["ativa", "encerrada"].includes(estado) ? plus(-200 + i * 3 + 12 + (i % 4) * 9) : undefined,
   };
@@ -72,9 +72,9 @@ export const seedEstagiarios: Estagiario[] = seedVagas
   .filter((v) => v.estado === "ativa" || v.estado === "encerrada")
   .map((v, k) => {
     const bolsista = k % 4 !== 3;
-    const desfecho = v.estado === "encerrada" ? desfechos[k % desfechos.length] : null;
+    const desfecho = v.estado === "encerrada" ? desfechos[k % desfechos.length]! : null;
     return {
-      id: `e${k + 1}`, nome: nomes[k % nomes.length], vagaId: v.id, setorId: v.setorId, instituicaoId: v.instituicaoId!,
+      id: `e${k + 1}`, nome: nomes[k % nomes.length]!, vagaId: v.id, setorId: v.setorId, instituicaoId: v.instituicaoId!,
       curso: v.curso, periodo: 5 + (k % 5), orientador: "Prof. " + ["Ribeiro", "Sales", "Moraes"][k % 3], preceptor: v.preceptor,
       vinculo: bolsista ? "Bolsista" : "Voluntário", bolsa: bolsista ? [800, 1000, 1200][k % 3] : 0,
       inicio: v.inicio, fim: v.fim, atividades: "Apoio à rotina do setor, registros e acompanhamento supervisionado.",
