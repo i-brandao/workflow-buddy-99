@@ -75,8 +75,8 @@ export const seedEstagiarios: Estagiario[] = seedVagas
     const desfecho = v.estado === "encerrada" ? desfechos[k % desfechos.length]! : null;
     return {
       id: `e${k + 1}`, nome: nomes[k % nomes.length]!, vagaId: v.id, setorId: v.setorId, instituicaoId: v.instituicaoId!,
-      curso: v.curso, periodo: 5 + (k % 5), orientador: "Prof. " + ["Ribeiro", "Sales", "Moraes"][k % 3], preceptor: v.preceptor,
-      vinculo: bolsista ? "Bolsista" : "Voluntário", bolsa: bolsista ? [800, 1000, 1200][k % 3] : 0,
+      curso: v.curso, periodo: 5 + (k % 5), orientador: "Prof. " + ["Ribeiro", "Sales", "Moraes"][k % 3]!, preceptor: v.preceptor,
+      vinculo: bolsista ? "Bolsista" : "Voluntário", bolsa: bolsista ? [800, 1000, 1200][k % 3]! : 0,
       inicio: v.inicio, fim: v.fim, atividades: "Apoio à rotina do setor, registros e acompanhamento supervisionado.",
       escala: [1, 2, 3, 4, 5].filter((d) => (d + k) % 5 !== 0).map((dia) => ({ dia, entrada: k % 2 ? "13:00" : "07:00", saida: k % 2 ? "19:00" : "13:00" })),
       documentos: DOCS.map((t, j) => ({ tipo: t, entregue: (j + k) % 6 !== 0 })),
