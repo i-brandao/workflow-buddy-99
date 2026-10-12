@@ -10,33 +10,141 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuditoriaRouteImport } from './routes/auditoria'
+import { Route as ContratacoesRouteImport } from './routes/contratacoes'
+import { Route as FinanceiroRouteImport } from './routes/financeiro'
+import { Route as InsightsRouteImport } from './routes/insights'
+import { Route as InstituicoesRouteImport } from './routes/instituicoes'
+import { Route as VagasRouteImport } from './routes/vagas'
+import { Route as EstagiariosIndexRouteImport } from './routes/estagiarios.index'
+import { Route as EstagiariosIdRouteImport } from './routes/estagiarios.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuditoriaRoute = AuditoriaRouteImport.update({
+  id: '/auditoria',
+  path: '/auditoria',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContratacoesRoute = ContratacoesRouteImport.update({
+  id: '/contratacoes',
+  path: '/contratacoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FinanceiroRoute = FinanceiroRouteImport.update({
+  id: '/financeiro',
+  path: '/financeiro',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InsightsRoute = InsightsRouteImport.update({
+  id: '/insights',
+  path: '/insights',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InstituicoesRoute = InstituicoesRouteImport.update({
+  id: '/instituicoes',
+  path: '/instituicoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VagasRoute = VagasRouteImport.update({
+  id: '/vagas',
+  path: '/vagas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EstagiariosIndexRoute = EstagiariosIndexRouteImport.update({
+  id: '/estagiarios/',
+  path: '/estagiarios/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EstagiariosIdRoute = EstagiariosIdRouteImport.update({
+  id: '/estagiarios/$id',
+  path: '/estagiarios/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auditoria': typeof AuditoriaRoute
+  '/contratacoes': typeof ContratacoesRoute
+  '/financeiro': typeof FinanceiroRoute
+  '/insights': typeof InsightsRoute
+  '/instituicoes': typeof InstituicoesRoute
+  '/vagas': typeof VagasRoute
+  '/estagiarios/$id': typeof EstagiariosIdRoute
+  '/estagiarios/': typeof EstagiariosIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auditoria': typeof AuditoriaRoute
+  '/contratacoes': typeof ContratacoesRoute
+  '/financeiro': typeof FinanceiroRoute
+  '/insights': typeof InsightsRoute
+  '/instituicoes': typeof InstituicoesRoute
+  '/vagas': typeof VagasRoute
+  '/estagiarios/$id': typeof EstagiariosIdRoute
+  '/estagiarios': typeof EstagiariosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auditoria': typeof AuditoriaRoute
+  '/contratacoes': typeof ContratacoesRoute
+  '/financeiro': typeof FinanceiroRoute
+  '/insights': typeof InsightsRoute
+  '/instituicoes': typeof InstituicoesRoute
+  '/vagas': typeof VagasRoute
+  '/estagiarios/$id': typeof EstagiariosIdRoute
+  '/estagiarios/': typeof EstagiariosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auditoria'
+    | '/contratacoes'
+    | '/financeiro'
+    | '/insights'
+    | '/instituicoes'
+    | '/vagas'
+    | '/estagiarios/$id'
+    | '/estagiarios/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auditoria'
+    | '/contratacoes'
+    | '/financeiro'
+    | '/insights'
+    | '/instituicoes'
+    | '/vagas'
+    | '/estagiarios/$id'
+    | '/estagiarios'
+  id:
+    | '__root__'
+    | '/'
+    | '/auditoria'
+    | '/contratacoes'
+    | '/financeiro'
+    | '/insights'
+    | '/instituicoes'
+    | '/vagas'
+    | '/estagiarios/$id'
+    | '/estagiarios/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuditoriaRoute: typeof AuditoriaRoute
+  ContratacoesRoute: typeof ContratacoesRoute
+  FinanceiroRoute: typeof FinanceiroRoute
+  InsightsRoute: typeof InsightsRoute
+  InstituicoesRoute: typeof InstituicoesRoute
+  VagasRoute: typeof VagasRoute
+  EstagiariosIdRoute: typeof EstagiariosIdRoute
+  EstagiariosIndexRoute: typeof EstagiariosIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +156,75 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auditoria': {
+      id: '/auditoria'
+      path: '/auditoria'
+      fullPath: '/auditoria'
+      preLoaderRoute: typeof AuditoriaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contratacoes': {
+      id: '/contratacoes'
+      path: '/contratacoes'
+      fullPath: '/contratacoes'
+      preLoaderRoute: typeof ContratacoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/financeiro': {
+      id: '/financeiro'
+      path: '/financeiro'
+      fullPath: '/financeiro'
+      preLoaderRoute: typeof FinanceiroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/insights': {
+      id: '/insights'
+      path: '/insights'
+      fullPath: '/insights'
+      preLoaderRoute: typeof InsightsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/instituicoes': {
+      id: '/instituicoes'
+      path: '/instituicoes'
+      fullPath: '/instituicoes'
+      preLoaderRoute: typeof InstituicoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vagas': {
+      id: '/vagas'
+      path: '/vagas'
+      fullPath: '/vagas'
+      preLoaderRoute: typeof VagasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/estagiarios/': {
+      id: '/estagiarios/'
+      path: '/estagiarios'
+      fullPath: '/estagiarios/'
+      preLoaderRoute: typeof EstagiariosIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/estagiarios/$id': {
+      id: '/estagiarios/$id'
+      path: '/estagiarios/$id'
+      fullPath: '/estagiarios/$id'
+      preLoaderRoute: typeof EstagiariosIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuditoriaRoute: AuditoriaRoute,
+  ContratacoesRoute: ContratacoesRoute,
+  FinanceiroRoute: FinanceiroRoute,
+  InsightsRoute: InsightsRoute,
+  InstituicoesRoute: InstituicoesRoute,
+  VagasRoute: VagasRoute,
+  EstagiariosIdRoute: EstagiariosIdRoute,
+  EstagiariosIndexRoute: EstagiariosIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
