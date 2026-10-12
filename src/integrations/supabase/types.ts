@@ -14,16 +14,155 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      intern_assignments: {
+        Row: {
+          id: string
+          intern_data: Json
+          user_id: string
+          vacancy_id: string
+        }
+        Insert: {
+          id?: string
+          intern_data?: Json
+          user_id: string
+          vacancy_id: string
+        }
+        Update: {
+          id?: string
+          intern_data?: Json
+          user_id?: string
+          vacancy_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "intern_assignments_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "intern_profiles"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      intern_profiles: {
+        Row: {
+          academic_period: number
+          birth_date: string | null
+          course: string
+          created_at: string
+          full_name: string
+          institution: string
+          phone: string
+          registration: string
+          user_id: string
+        }
+        Insert: {
+          academic_period?: number
+          birth_date?: string | null
+          course?: string
+          created_at?: string
+          full_name?: string
+          institution?: string
+          phone?: string
+          registration?: string
+          user_id: string
+        }
+        Update: {
+          academic_period?: number
+          birth_date?: string | null
+          course?: string
+          created_at?: string
+          full_name?: string
+          institution?: string
+          phone?: string
+          registration?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      management_state: {
+        Row: {
+          data: Json
+          id: number
+        }
+        Insert: {
+          data?: Json
+          id?: number
+        }
+        Update: {
+          data?: Json
+          id?: number
+        }
+        Relationships: []
+      }
+      public_vacancies: {
+        Row: {
+          course: string
+          end_date: string
+          id: string
+          kind: string
+          sector: string
+          start_date: string
+          status: string
+          unit: string
+          weekly_hours: number
+        }
+        Insert: {
+          course: string
+          end_date: string
+          id: string
+          kind: string
+          sector: string
+          start_date: string
+          status: string
+          unit: string
+          weekly_hours: number
+        }
+        Update: {
+          course?: string
+          end_date?: string
+          id?: string
+          kind?: string
+          sector?: string
+          start_date?: string
+          status?: string
+          unit?: string
+          weekly_hours?: number
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "management" | "intern"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +289,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["management", "intern"],
+    },
   },
 } as const
