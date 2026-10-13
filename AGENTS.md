@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep demo profile visibility rules in the browser-safe access module; demo filtering is not an authentication or security boundary.
+- Finance comparisons use explicitly entered monthly sector budgets and payment records, never projected stipends as actual expenses.

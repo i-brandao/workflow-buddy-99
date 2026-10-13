@@ -38,7 +38,8 @@ function Painel() {
     mes: m.toLocaleDateString("pt-BR", { month: "short" }),
     Ocupadas: vagas.filter((v) => ["ativa", "encerrada"].includes(v.estado) && new Date(v.inicio) <= m && new Date(v.fim) >= m).length,
   }));
-  const funil = ESTADOS.map((e) => ({ estado: e.label, total: count(e.id) }));
+  const colors = ["demand", "request", "selection", "active", "closed"];
+  const funil = ESTADOS.map((e, i) => ({ estado: e.label, total: count(e.id), color: `var(--state-${colors[i]})` }));
 
   return (
     <>
@@ -73,7 +74,7 @@ function Painel() {
         <Panel title="Funil de estados">
           <ResponsiveContainer width="100%" height={240}>
             <BarChart data={funil} layout="vertical" margin={{ left: 40 }}><XAxis type="number" allowDecimals={false} fontSize={12} /><YAxis type="category" dataKey="estado" width={130} fontSize={12} /><Tooltip />
-              <Bar dataKey="total" radius={[0, 4, 4, 0]}>{funil.map((_, i) => <Cell key={i} fill={`var(--chart-${(i % 5) + 1})`} />)}</Bar></BarChart>
+              <Bar name="Vagas" dataKey="total" radius={[0, 4, 4, 0]}>{funil.map((r) => <Cell key={r.estado} fill={r.color} />)}</Bar></BarChart>
           </ResponsiveContainer>
         </Panel>
       </div>
