@@ -20,7 +20,7 @@ export const Route = createFileRoute("/instituicoes")({
 const input = "rounded-md border bg-card px-3 py-2 text-sm";
 
 function Instituicoes() {
-  const { instituicoes, vagas, estagiarios, update } = useScoped();
+   const { instituicoes, vagas, estagiarios, update, verFinanceiro } = useScoped();
   return (
     <>
       <PageHeader eyebrow="Convênios" title="Instituições de ensino" />
@@ -42,7 +42,7 @@ function Instituicoes() {
           );
         })}
       </div>
-      <Panel title="Cadastrar instituição" className="mt-6">
+      {verFinanceiro && <Panel title="Cadastrar instituição" className="mt-6">
         <form className="flex flex-wrap gap-2" action={(f) => {
           update((s) => ({ ...s, instituicoes: [...s.instituicoes, { id: `i${Date.now()}`, nome: String(f.get("nome")), contato: String(f.get("contato")), convenioAte: String(f.get("ate")) }] }), `Nova instituição: ${f.get("nome")}`);
           toast.success("Instituição cadastrada");
@@ -52,7 +52,7 @@ function Instituicoes() {
           <input name="ate" type="date" required className={input} />
           <Button type="submit">Adicionar</Button>
         </form>
-      </Panel>
+      </Panel>}
     </>
   );
 }
